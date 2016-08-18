@@ -1,18 +1,23 @@
-import Hello from './hello.jsx';
+import {Router, Route, IndexRedirect, hashHistory} from 'react-router';
 import React from 'react';
 import ReactDOM from 'react-dom';
+require('jquery');
+require("bootstrap-webpack");
 import $ from 'jquery';
 
+const route = <Router history={hashHistory}>
+  <Route path="/" component={App}>
+    <IndexRedirect to='/api/sessions'/>
+{/*    <Route path='/api/sessions' component={LoginPage}/>*/}
+  </Route>
+</Router>;
+
 ReactDOM.render(
-  <Hello />,
+  route,
   document.getElementById("content")
 );
-
-// use jquery
 console.log($('#content').text());
 
-// Notice!!!
-// Following is required to make reloading happen
 if (module.hot) {
   module.hot.accept();
 }

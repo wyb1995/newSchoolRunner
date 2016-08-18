@@ -3,10 +3,13 @@ import webpackConfig from '../webpack.config';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import express from 'express';
-
+import loginApi from "./api/api.js";
+import bodyParse from 'body-parser';
+import db from './mongodb/db';
 const app = express();
 const compiler = webpack(webpackConfig);
-
+app.use(bodyParse.json());
+app.use(bodyParse.urlencoded({extended: true}));
 app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
   lazy: false,
@@ -22,11 +25,14 @@ app.use(webpackHotMiddleware(compiler, {
 }));
 
 app.use(express.static('./public'));
+app.use("/api", loginApi);
+/*
+ app.post('/login',mongodb.login);*/
+/*app.post('/personal',mongodb.modify);*/
 
-app.get('/hello', function(req, res) {
-  res.send('Hello, world!');
-});
-
-app.listen(3000, function() {
+app.listen(3000, function () {
+  db.connect();
   console.log('Listening on 3000');
 });
+
+export default app;

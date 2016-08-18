@@ -26,9 +26,6 @@ app.use(webpackHotMiddleware(compiler, {
 
 app.use(express.static('./public'));
 app.use("/api", loginApi);
-/*
- app.post('/login',mongodb.login);*/
-/*app.post('/personal',mongodb.modify);*/
 
 app.listen(3000, function () {
   db.connect();

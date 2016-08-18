@@ -16,7 +16,6 @@ class Login extends React.Component {
     }
   }
 
-
   handle(event) {
     event.preventDefault();
     request.post('/api/sessions')
@@ -27,25 +26,26 @@ class Login extends React.Component {
       .end((err, res) => {
         if (err) return console.error(err);
         if (res.ok) {
-          if (res.statusCode == 400) {
-            console.log(res.text.massaage);
+          if (res.statusCode === 400) {
+            console.log(res.body.message);
             location.href = '/#/login-page';
           }
-          if (res.statusCode == 201 && res.text.newUser === true) {
-            console.log(res.text.massaage);
-            location.href = '/#personalInfoPage';
+          if (res.statusCode === 201 && res.body.newUser === true) {
+            console.log(res.body.message);
+            // location.href = '/#/personalInfoPage';
           }
-          if (res.statusCode == 201 && res.text.newUser === false) {
-            console.log(res.text.massaage);
-            location.href = '/#/homePage';
+          if (res.statusCode === 201 && res.body.newUser === false) {
+            console.log(res.body.message);
+            // location.href = '/#/homePage';
           }
-          if (res.statusCode == 401) {
-            console.log(res.text.massaage);
+          if (res.statusCode === 401) {
+            console.log(res.body.message);
             location.href = '/#/login-page';
           }
         }
       })
   }
+
   changeUserId(event) {
     this.setState({
       userId: event.target.value
@@ -57,6 +57,7 @@ class Login extends React.Component {
       password: event.target.value
     })
   }
+
   render() {
     return <div className="container">
       <form className=" col-md-5 col-md-offset-5 form-horizontal login" onSubmit={this.handle.bind(this)}>
@@ -64,7 +65,8 @@ class Login extends React.Component {
         <div className="form-group">
           <label htmlFor="userId" className="col-md-2 control-label distance">学号</label>
           <div className="col-md-10">
-            <input type="text" value={this.state.userId} className="form-control distance" id="userId" placeholder="Student ID"
+            <input type="text" value={this.state.userId} className="form-control distance" id="userId"
+                   placeholder="Student ID"
                    onChange={this.changeUserId.bind(this)}/>
           </div>
         </div>

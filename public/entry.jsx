@@ -1,4 +1,6 @@
 import {Router, Route, IndexRedirect, hashHistory} from 'react-router';
+import LoginPage from './jsx/login-page.jsx';
+import App from './jsx/app.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 require('jquery');
@@ -7,8 +9,8 @@ import $ from 'jquery';
 
 const route = <Router history={hashHistory}>
   <Route path="/" component={App}>
-    <IndexRedirect to='/api/sessions'/>
-{/*    <Route path='/api/sessions' component={LoginPage}/>*/}
+    <IndexRedirect to='/login-page'/>
+    <Route path='/login-page' component={LoginPage}/>
   </Route>
 </Router>;
 

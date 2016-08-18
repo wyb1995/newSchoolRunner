@@ -5,7 +5,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 require('jquery');
 require("bootstrap-webpack");
-import $ from 'jquery';
 
 const route = <Router history={hashHistory}>
   <Route path="/" component={App}>
@@ -18,7 +17,6 @@ ReactDOM.render(
   route,
   document.getElementById("content")
 );
-console.log($('#content').text());
 
 if (module.hot) {
   module.hot.accept();

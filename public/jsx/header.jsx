@@ -1,7 +1,7 @@
 import React from 'react';
-require('../css/logo.css');
+require('../css/header.css');
 
-class Top extends React.Component {
+class Header extends React.Component {
   render() {
     return (
       <div className="header">
@@ -12,6 +12,6 @@ class Top extends React.Component {
   }
 }
 
-export default Top;
+export default Header;
 
 

@@ -9,16 +9,13 @@ describe('sessions-spec', () => {
     User.find().remove(finish(done));
   });
 
-  xit('post true id and password sessions', (done) => {
+  it('post true id and password sessions', (done) => {
     new User({userId: 's03134054', password: '123456'}).save(function (err, data) {
       if (err) return done.fail(err);
-
-      User.find(function (err, users) {
-        request(app)
-          .post('/api/sessions')
-          .send({userId: 's03134054', password: '123456'})
-          .expect({httpCode: 201, message: "SUCCESS", newUser: false}, finish(done))
-      })
+      request(app)
+        .post('/api/sessions')
+        .send({userId: 's03134054', password: '123456'})
+        .expect({httpCode: 201, message: "SUCCESS", newUser: false}, finish(done))
     })
   });
 

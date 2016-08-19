@@ -18,7 +18,7 @@ describe('sessions-spec', () => {
   afterEach((done)=>{
     db.close(finish(done));
   });
-  it('用户输入的ID与密码全都正确，并且不是第一次登录：', (done) => {
+  xit('用户输入的ID与密码全都正确，并且不是第一次登录：', (done) => {
     async.waterfall([
       (cb) => new User({userId: 's03134054', password: '123456'}).save((err, data) => {
         if (err) return done.fail(err);
@@ -28,7 +28,7 @@ describe('sessions-spec', () => {
     ],finish(done));
   });
 
-  it('用户输入的ID与密码全都正确，并且是第一次登录：', (done) => {
+  xit('用户输入的ID与密码全都正确，并且是第一次登录：', (done) => {
     async.waterfall([
       (cb) => request(app).post('/api/sessions').send({userId: 's03134059', password: '123456'})
         .expect(201, {message: "SUCCESS", newUser: true}, cb)

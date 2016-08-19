@@ -4,9 +4,8 @@ import request from 'superagent';
 import _ from 'lodash';
 import {User} from '../mongodb/schema';
 
-const sessionsApi = express.Router();
-let session = '';
-sessionsApi.post('/', function (req, res, next) {
+const router = express.Router();
+router.post('/', function (req, res, next) {
   const userId = req.body.userId;
   const password = req.body.password;
   if (_.isEmpty(userId) || _.isEmpty(password)) {
@@ -21,7 +20,6 @@ sessionsApi.post('/', function (req, res, next) {
         if (detail === 'ACCOUNT_ERROR') {
           return res.status(401).send("用户名或密码有误，登录失败");
         }
-        session = detail;
         User.findOne({userId: userId}, function (err, user) {
           if (err) return next(err);
           if (user == null) {
@@ -33,8 +31,5 @@ sessionsApi.post('/', function (req, res, next) {
   }
 });
 
-export{
-  sessionsApi,
-  session
-} ;
+export default  router;
 

@@ -23,7 +23,6 @@ app.use(webpackDevMiddleware(compiler, {
 app.use(webpackHotMiddleware(compiler, {
   log: console.log
 }));
-
 app.use(express.static('./public'));
 app.use("/api", apiRouter);
 if(require.main === module) {

@@ -19,18 +19,13 @@ describe('sessions-spec', () => {
     db.close(finish(done));
   });
   it('用户输入的ID与密码全都正确，并且不是第一次登录：', (done) => {
-    new User({userId: 's03134054', password: '123456'}).save(function (err, data) {
-      if (err) return done.fail(err);
-      request(app)
-        .post('/api/sessions')
-        .send({userId: 's03134054', password: '123456'})
-        .expect(201, {message: "SUCCESS", newUser: false}, finish(done))
-    });
-    // async.waterfall([
-    //   (cb) => new User({userId: 's03134054', password: '123456'}).save((err, data) => cb(err,data)),
-    //   (cb) => request(app).post('/api/sessions').send({userId: 's03134054', password: '123456'})
-    //     .expect(201, {message: "SUCCESS", newUser: false}, cb)
-    // ],finish(done));
+    async.waterfall([
+      (cb) => new User({userId: 's03134054', password: '123456'}).save((err, data) => {
+        if (err) return done.fail(err);
+        request(app).post('/api/sessions').send({userId: 's03134054', password: '123456'})
+          .expect(201, {message: "SUCCESS", newUser: false}, cb)
+      })
+    ],finish(done));
   });
 
   it('用户输入的ID与密码全都正确，并且是第一次登录：', (done) => {

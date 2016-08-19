@@ -24,23 +24,22 @@ class Login extends React.Component {
         password: this.state.password
       })
       .end((err, res) => {
-        if (err) return console.error(err);
-          if (res.statusCode === 400) {
+        if (err) {
+          if (res.statusCode === 400 || res.statusCode === 401) {
             console.log(res.text);
             location.href = '/#/login-page';
           }
-          if (res.statusCode === 201 && res.body.newUser === true) {
+          return console.error(err);
+        }
+        if (res.statusCode === 201 && res.body.newUser === true) {
+          if(res.body.newUser) {
             console.log(res.body.message);
-            // location.href = '/#/personalInfoPage';
-          }
-          if (res.statusCode === 201 && res.body.newUser === false) {
+            location.href = '/#/personalInfoPage?session:' + res.body.detail;
+          }else{
             console.log(res.body.message);
-            // location.href = '/#/homePage';
+            location.href = '/#/homePage?session:' + res.body.detail;
           }
-          if (res.statusCode === 401) {
-            console.log(res.text);
-            location.href = '/#/login-page';
-          }
+        }
       })
   }
 

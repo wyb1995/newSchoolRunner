@@ -1,0 +1,15 @@
+#personalInfor{
+    width: 40%;
+    border-radius: 10px;
+    border: #c0c0c0 solid 3px;
+    margin-top: 60px;
+    padding: 0 40px 10px 40px;
+}
+
+h2{
+    text-align: center;
+}
+#submitId{
+    float: right;
+}
+

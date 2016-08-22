@@ -9,72 +9,62 @@ import request from 'superagent';
 class Personal extends React.Component {
   constructor(props) {
     super(props);
-
-    let userId = this.getIdValue();
-    let sessionKey = this.getSessionValue();
-
     this.state = {
-      userId: userId,
-      seesionkey: sessionKey,
       email: '',
       tel: ''
     }
   }
 
-  getIdValue() {
-    let startPos = window.location.toString().indexOf("userId=");
-    let userId = window.location.toString().substr(startPos + 7, 9);
-
-    return userId;
+  componentWillMount() {
+    request.get('/api/cookieState')
+      .end((err, res)=> {
+        if (err) {
+          if (res.statusCode === 401) {
+            alert('Please Login!');
+            location.herf = '/#/login-page'
+          } else {
+            return alert(err)
+          }
+        }
+      })
   }
 
-  getSessionValue() {
-    let startPos = window.location.toString().indexOf("=");
-    let endPos = window.location.toString().indexOf("&");
-    let session = window.location.toString().substring(startPos + 1, endPos);
-
-    return session;
-  }
-
-
-  _onEmailChanged(event){
+  _onEmailChanged(event) {
     this.setState({
       email: event.target.value
     });
   }
 
-  _onTelChanged(event){
+  _onTelChanged(event) {
 
     this.setState({
       tel: event.target.value
     });
   }
 
-  _onSubmit(event){
+  _onSubmit(event) {
     event.preventDefault();
 
     request.post('/api/users')
       .send({
-        userId: this.state.userId,
-        sessionKey: this.state.seesionkey,
         email: this.state.email,
         tel: this.state.tel
       })
       .end((err, res) => {
-        if (err){
+        if (err) {
           if (res.statusCode === 400) {
             console.log(res.text);
-             return location.href = '/#/personal-page';
+            return location.href = '/#/personal-page';
           }
 
           if (res.statusCode === 403) {
             console.log(res.text);
-            return location.href='/#/login-page';
+            return location.href = '/#/login-page';
           }
 
           if (res.statusCode === 409) {
             console.log(res.text);
-             return location.href = '/#/home-page'
+            return location.href = '/#/home-page'
           }
 
           return console.error(err);
@@ -90,7 +80,7 @@ class Personal extends React.Component {
   render() {
     return (
       <div className="container" id="personalInfor">
-        <form role="form"  onSubmit={this._onSubmit.bind(this)}>
+        <form role="form" onSubmit={this._onSubmit.bind(this)}>
           <h2>个人信息</h2>
           <div className="form-group">
             <label htmlFor="inputEmail">电子邮箱</label>

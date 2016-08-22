@@ -26,18 +26,18 @@ class Login extends React.Component {
       .end((err, res) => {
         if (err) {
           if (res.statusCode === 400 || res.statusCode === 401) {
-            console.log(res.text);
+            alert(res.text);
             location.href = '/#/login-page';
           }
           return console.error(err);
         }
-        if (res.statusCode === 201 && res.body.newUser === true) {
-          if(res.body.newUser) {
+        if (res.statusCode === 201) {
+          if (res.body.newUser) {
             console.log(res.body.message);
-            location.href = '/#/personalInfoPage?session:' + res.body.detail;
-          }else{
+            location.href = '/#/personalInfo-page';
+          } else {
             console.log(res.body.message);
-            location.href = '/#/homePage?session:' + res.body.detail;
+            location.href = '/#/home-page';
           }
         }
       })

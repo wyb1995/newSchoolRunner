@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node app/server.js --ignore 'node_modules/' || exit 0",
-    "test": "jasmine || exit 1"
+    "lint": "eslint . -c twa-camp-2016 --no-eslintrc || exit 0",
+    "test": "jasmine",
+    "test-all": "JASMINE_CONFIG_PATH=spec/support/jasmine-all.json jasmine || exit 0"
   },
   "keywords": [],
   "author": "",
@@ -41,10 +43,15 @@
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
     "react-router": "^2.6.1",
+    "sha1": "^1.1.1",
     "superagent": "^2.2.0",
     "superagent-jsonp": "^0.1.1",
     "supertest": "^2.0.0",
     "supertext": "^1.0.0",
-    "url-loader": "^0.5.7"
+    "url-loader": "^0.5.7",
+    "superagent-logger": "latest"
+  },
+  "engines": {
+    "node": ">=6.0.0"
   }
 }

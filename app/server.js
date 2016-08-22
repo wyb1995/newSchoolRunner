@@ -1,9 +1,10 @@
+/*eslint no-console: "off"*/
 import webpack from 'webpack';
 import webpackConfig from '../webpack.config';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import express from 'express';
-import apiRouter from "./api/index.js";
+import apiRouter from './api/index.js';
 import bodyParse from 'body-parser';
 import db from './mongodb/db';
 const app = express();
@@ -24,11 +25,11 @@ app.use(webpackHotMiddleware(compiler, {
   log: console.log
 }));
 app.use(express.static('./public'));
-app.use("/api", apiRouter);
-if(require.main === module) {
+app.use('/api', apiRouter);
+if (require.main === module) {
   app.listen(3000, function () {
     db.connect((err) => {
-      if(err) return console.error('db connection failed');
+      if (err) return console.error('db connection failed');
       console.log('Listening on 3000');
     });
   });

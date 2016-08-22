@@ -15,6 +15,11 @@ img {
     margin: auto;
 }
 
+.navWidht{
+    margin: 0 auto;
+    width: 90%;
+}
+
 .active {
     border: none !important;
     padding: 0 !important;
@@ -28,10 +33,5 @@ img {
 
 .carousel-control.left {
     background-image: none !important;
-}
-
-.navWidht{
-    margin: 0 auto;
-    width: 90%;
 }
 

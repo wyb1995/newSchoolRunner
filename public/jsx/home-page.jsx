@@ -20,6 +20,7 @@ class Navigation extends React.Component {
     )
   }
 }
+
 class CaroudelFigure extends React.Component {
   render() {
     return (
@@ -52,6 +53,7 @@ class CaroudelFigure extends React.Component {
     )
   }
 }
+
 class Describe extends React.Component {
   render() {
     return (
@@ -78,6 +80,7 @@ class Describe extends React.Component {
     );
   }
 }
+
 class HomePage extends React.Component {
   render() {
     return (
@@ -93,4 +96,5 @@ class HomePage extends React.Component {
     );
   }
 }
+
 export default HomePage;

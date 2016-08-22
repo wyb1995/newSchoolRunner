@@ -1,6 +1,5 @@
 import request from 'superagent';
 import logger from 'superagent-logger';
-import nock from 'nock';
 function xiyouLogin({userId, password}, callback) {
   request.get('https://api.xiyoumobile.com/xiyoulibv2/user/login')
     .use(logger)

@@ -44,7 +44,7 @@ describe('sessions-spec', () => {
       db.close(finish(done));
     });
     it('用户输入的ID与密码全都正确，并且是第一次登录：', (done) => {
-      nock("https://api.xiyoumobile.com/")
+      nock('https://api.xiyoumobile.com/')
         .get('/xiyoulibv2/user/login')
         .reply(201, {
           Detail: 'JSESSIONID=35260D4482F3615563950C4546622A5C; Path=/opac_two',
@@ -56,7 +56,7 @@ describe('sessions-spec', () => {
     });
 
     it('用户输入的ID与密码全都正确，并且不是第一次登录：', (done) => {
-      nock("https://api.xiyoumobile.com/")
+      nock('https://api.xiyoumobile.com/')
         .get('/xiyoulibv2/user/login')
         .reply(201, {
           Detail: 'JSESSIONID=35260D4482F3615563950C4546622A5C; Path=/opac_two',
@@ -70,7 +70,7 @@ describe('sessions-spec', () => {
       ], finish(done));
     });
     it('用户输入的用户名密码不匹配：', (done) => {
-      nock("https://api.xiyoumobile.com/")
+      nock('https://api.xiyoumobile.com/')
         .get('/xiyoulibv2/user/login')
         .reply(201, {
           Detail: 'ACCOUNT_ERROR',

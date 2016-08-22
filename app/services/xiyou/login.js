@@ -7,8 +7,8 @@ function xiyouLogin({userId, password}, callback) {
     .end((err, response) => {
       if (err) return callback(err);
       const detail = response.body.Detail;
-      const loginSuccessfully = detail === 'ACCOUNT_ERROR';
-      callback(null, loginSuccessfully, detail, userId);
+      const loginfail = detail === 'ACCOUNT_ERROR';
+      callback(null, loginfail, detail, userId);
     });
 }
 export default xiyouLogin;

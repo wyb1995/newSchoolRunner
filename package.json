@@ -40,16 +40,17 @@
     "less-loader": "^2.2.3",
     "lodash": "^4.15.0",
     "mongoose": "^4.5.9",
+    "nock": "^8.0.0",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
     "react-router": "^2.6.1",
     "sha1": "^1.1.1",
     "superagent": "^2.2.0",
     "superagent-jsonp": "^0.1.1",
+    "superagent-logger": "latest",
     "supertest": "^2.0.0",
     "supertext": "^1.0.0",
-    "url-loader": "^0.5.7",
-    "superagent-logger": "latest"
+    "url-loader": "^0.5.7"
   },
   "engines": {
     "node": ">=6.0.0"

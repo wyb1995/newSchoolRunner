@@ -1,6 +1,5 @@
-
-#homes {
-    margin: 0px auto;
+#pageBody{
+    padding-bottom: 80px;
 }
 
 img {
@@ -10,13 +9,19 @@ img {
 }
 
 .page {
+    width:90%;
+    min-height:100%;
+    position:relative;
     margin: auto;
+}
+
+.navWidht{
+    margin: 0 auto;
     width: 90%;
 }
 
 .active {
     border: none !important;
-
     padding: 0 !important;
     height: 500px;
 

@@ -5,6 +5,7 @@ import sha1 from 'sha1';
 import {User} from '../mongodb/schema';
 import xiyouLogin from '../services/xiyou/login';
 const router = express.Router();
+
 router.post('/', function (req, res, next) {
   const userId = req.body.userId;
   const password = req.body.password;

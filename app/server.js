@@ -6,11 +6,13 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import express from 'express';
 import apiRouter from './api/index.js';
 import bodyParse from 'body-parser';
+const cookieParser = require('cookie-parser');
 import db from './mongodb/db';
 const app = express();
 const compiler = webpack(webpackConfig);
 app.use(bodyParse.json());
 app.use(bodyParse.urlencoded({extended: true}));
+app.use(cookieParser());
 app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
   lazy: false,

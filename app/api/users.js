@@ -41,11 +41,7 @@ router.post('/', function (req, res, next) {
 });
 
 function getUserIdFromInfo(req) {
-  const startPosition = req.headers.cookie.indexOf('info') + 5;
-  const length = req.headers.cookie.length;
-  const infos = req.headers.cookie.substring(startPosition, length);
-  const arr = infos.split('%3A');
-  const info = arr[0] + ':' + arr[1];
+  const info = req.cookies['info'];
   const separatorIndex = _.lastIndexOf(info, ':');
   return info.substring(0, separatorIndex);
 }

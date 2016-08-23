@@ -12,7 +12,9 @@ class Navigation extends React.Component {
       <nav className="navbar navbar-default" role="navigation">
         <div>
           <ul className="nav navbar-nav">
-            <li><Link to="/homePage">首页</Link></li>
+            <li><Link to="/home-page">首页</Link></li>
+            <li><Link to="/library-page">图书信息</Link></li>
+            <li><Link to="/bookerCircle-page">书友圈</Link></li>
             <li><Link to="/personalInfo-page">个人信息</Link></li>
           </ul>
         </div>

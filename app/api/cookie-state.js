@@ -7,11 +7,7 @@ import _ from 'lodash';
 const router = express.Router();
 
 router.get('/', function (req, res) {
-  const startPosition = req.headers.cookie.indexOf('info') + 5;
-  const length = req.headers.cookie.length;
-  const infos = req.headers.cookie.substring(startPosition, length);
-  const arr = infos.split('%3A');
-  const info = arr[0] + ':' + arr[1];
+  const  info = req.cookies['info'];
   if (info === null || info.length === 0 || !info.includes(':')) {
     return false;
   }

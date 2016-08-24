@@ -1,6 +1,7 @@
 'use strict';
 import express from 'express';
 import {User} from '../mongodb/schema';
+import currentApi from './current';
 import _ from 'lodash';
 import xiyouLogin from '../services/xiyou/login';
 import xiyouInfo from '../services/xiyou/info';
@@ -39,6 +40,8 @@ router.post('/', function (req, res, next) {
     });
   });
 });
+
+router.use('/current', currentApi);
 
 function getUserIdFromInfo(req) {
   const info = req.cookies['info'];

@@ -8,5 +8,14 @@ const UserModel = new Schema({
   tel: String,
   email: String
 });
+
+const messageModel = new Schema({
+  userId: String,
+  userName: String,
+  message: String,
+  date: String
+});
 const User = mongoose.model('users', UserModel);
-module.exports = {User};
+
+const Message = mongoose.model('messages', messageModel);
+module.exports = {User,Message};

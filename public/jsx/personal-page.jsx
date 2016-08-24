@@ -16,14 +16,14 @@ class Personal extends React.Component {
   }
 
   componentWillMount() {
-    request.get('/api/cookieState')
+    request.get('/api/users/current')
       .end((err, res)=> {
         if (err) {
           if (res.statusCode === 401) {
             alert('Please Login!');
             location.herf = '/#/login-page'
           } else {
-            return alert(err)
+            return alert(err);
           }
         }
       })

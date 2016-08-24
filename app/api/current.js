@@ -6,7 +6,8 @@ import checkLogin from '../tool/check-login';
 const router = express.Router();
 
 router.get('/', function (req, res) {
-  checkLogin(req, function (err, isLogin) {
+  checkLogin(req, function (err, isLogin, next) {
+    if(err) return next(err);
     if (!isLogin) {
       return res.sendStatus(401);
     }

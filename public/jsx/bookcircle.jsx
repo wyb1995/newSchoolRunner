@@ -36,7 +36,6 @@ class MessageList extends React.Component {
   }
 
   _onSend() {
-    alert(this.state.inputMessage);
     request.post('/api/messages')
       .send({
         inputMessage: this.state.inputMessage

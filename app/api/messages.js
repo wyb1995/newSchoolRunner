@@ -5,20 +5,21 @@ import _ from 'lodash';
 
 const router = express.Router();
 router.get('/', function (req, res) {
-  checkLogin(req, function (err, isLogin) {
+  checkLogin(req, function (err, isLogin, next) {
+    if(err) return next(err);
     if (!isLogin) {
       return res.sendStatus(401);
     }
     Message.find(function (err, messages, next) {
       if (err) return next(err);
-      console.log(messages);
       return res.json(messages);
     });
   });
 });
 
 router.post('/', function (req, res) {
-  checkLogin(req, function (err, isLogin) {
+  checkLogin(req, function (err, isLogin, next) {
+    if(err) return next(err);
     if (!isLogin) {
       return res.sendStatus(401);
     }
@@ -27,10 +28,10 @@ router.post('/', function (req, res) {
     User.findOne({userId: userId}, function (err, user, next) {
       if (err) return next(err);
       const userName = user.userName;
-      let day = new Date().getDate();
-      let hours = new Date().getHours();
-      let minutes = new Date().getMinutes();
-      let seconds = new Date().getSeconds();
+      const day = new Date().getDate();
+      const hours = new Date().getHours();
+      const minutes = new Date().getMinutes();
+      const seconds = new Date().getSeconds();
       const date = day + ',' + hours + ':' + minutes + ':' + seconds;
       new Message({userName: userName, message: req.body.inputMessage, date: date})
         .save(function (err, message) {

@@ -21,7 +21,8 @@ router.get('/', function (req, res) {
       const department = user.department;
       const email = user.email;
       const tel = user.tel;
-      return res.send({userName, userId, email, tel, department});
+      const readerType = user.readerType;
+      return res.send({userName, userId, email, tel, department, readerType});
     });
   });
 });

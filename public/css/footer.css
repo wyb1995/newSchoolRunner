@@ -1,8 +1,9 @@
 footer {
-    position: absolute;
-    bottom: 0;
-    background-color: #ece8cf;
     height: 80px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    background-color: #ece8cf;
     width: 100%;
     text-align: center;
     padding-top: 15px;
@@ -13,16 +14,11 @@ footer {
     margin-top: 8px;
 }
 
-a {
-    margin-right: 15px;
-    color: #949494;
+a, span{
+    margin-right: 20px;
 }
 
-a:hover {
-    color: #959595;
-    text-decoration: none;
-}
-
-a:visited {
-    text-decoration: none;
-}
+.footerA:link {text-decoration: none;}
+.footerA:visited {text-decoration: none;}
+.footerA:active {text-decoration: none;}
+.footerA:hover {text-decoration: none;}

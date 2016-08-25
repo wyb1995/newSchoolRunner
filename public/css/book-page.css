@@ -1,0 +1,47 @@
+#booksContain{
+    width: 55%;
+    border-radius: 10px;
+    border: #c0c0c0 solid 3px;
+    margin-top: 40px;
+    padding: 0;
+}
+
+.booksSpan{
+    font-size: large;
+}
+
+.bookDiv{
+    border-bottom: #c0c0c0 solid 3px;;
+    padding: 10px 30px 10px 30px;
+    text-align: center;
+}
+
+#borrowList{
+    padding: 10px 30px 10px 20px;
+}
+
+#borrowTitle{
+    text-align: center;
+}
+
+.eachBook {
+    height: 40px;
+}
+
+.btn-borrow{
+    float: right;
+}
+
+.contain{
+    min-height: 677px;
+    position:relative;
+}
+
+.body{
+    padding-bottom: 100px;
+}
+
+.bookLink:link {text-decoration: none;}
+.bookLink:visited {text-decoration: none;}
+.bookLink:active {text-decoration: none;}
+.bookLink:hover {text-decoration: none;}

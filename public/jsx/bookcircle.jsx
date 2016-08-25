@@ -94,7 +94,7 @@ class MessageList extends React.Component {
     );
     return (
       <div className="fullPage">
-        <button type="button" className="btn btn-primary back"><Link to="/home-page">返回</Link></button>
+        <button type="button" className="btn-link button back"><Link to="/home-page">返回</Link></button>
         <button type="button" className="btn-link button refresh" onClick={this._onClickRefresh.bind(this)}>刷新</button>
         <div>
           <div className="bottom common">

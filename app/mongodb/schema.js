@@ -6,7 +6,8 @@ const UserModel = new Schema({
   userName: String,
   password: String,
   tel: String,
-  email: String
+  email: String,
+  readerType: String
 });
 
 const messageModel = new Schema({

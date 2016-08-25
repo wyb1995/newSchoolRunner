@@ -27,9 +27,14 @@ If you expect the code for you automatically modify the error , please enter the
 eslint . -c twa-camp-2016 --no-eslintrc --fix
 ```
 
-Then visit <http://localhost:3000>, you will see `Hello world` on the page.
+Then visit <http://localhost:3000>,
+You will then go to schoolRunner site login screen , the account password account password campus library ,
+the initial password is 123456 , each time you log duration of 10 minutes, 10 minutes later ,
+you have to log in again to continue access .
 
-If you modify `public/hello.jsx` to change the text, you will see the changes are applied to page instantly.
 
+schoolRunner campus library provides a personal information inquiry ,
+book lending inquiry , renewal function , the book Circle of Friends , also on behalf of the book ,
+taken on behalf of Express functions.
 
 

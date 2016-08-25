@@ -6,7 +6,7 @@ import _ from 'lodash';
 const router = express.Router();
 router.get('/', function (req, res) {
   checkLogin(req, function (err, isLogin, next) {
-    if(err) return next(err);
+    if (err) return next(err);
     if (!isLogin) {
       return res.sendStatus(401);
     }
@@ -19,12 +19,16 @@ router.get('/', function (req, res) {
 
 router.post('/', function (req, res) {
   checkLogin(req, function (err, isLogin, next) {
-    if(err) return next(err);
+    if (err) return next(err);
     if (!isLogin) {
       return res.sendStatus(401);
     }
+    if (!req.body.inputMessage) {
+      return res.sendStatus(400);
+    }
     const info = req.cookies['info'];
     const userId = getUserIdFromInfo(info);
+    // Message.find().remove(function (err) {
     User.findOne({userId: userId}, function (err, user, next) {
       if (err) return next(err);
       const userName = user.userName;
@@ -39,7 +43,7 @@ router.post('/', function (req, res) {
           return res.status(201).json(message);
         });
     });
-
+    // })
   });
 });
 

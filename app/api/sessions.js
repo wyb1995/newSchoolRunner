@@ -19,7 +19,7 @@ router.post('/', function (req, res, next) {
     }
     User.findOne({userId: userId}, function (err, user) {
       if (err) return next(err);
-      res.cookie('info', generateInfo(userId, password));
+      res.cookie('info', generateInfo(userId, password),{maxAge: 60 * 10000});
       if (!user) {
         new User({userId: userId, password: password}).save(function (err) {
           if (err) return next(err);

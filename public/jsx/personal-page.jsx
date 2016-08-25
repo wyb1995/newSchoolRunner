@@ -21,7 +21,7 @@ class Personal extends React.Component {
         if (err) {
           if (res.statusCode === 401) {
             alert('Please Login!');
-            location.herf = '/#/login-page'
+            location.href = '/#/login-page'
           } else {
             return alert(err);
           }
@@ -44,36 +44,46 @@ class Personal extends React.Component {
 
   _onSubmit(event) {
     event.preventDefault();
-
-    request.post('/api/users')
-      .send({
-        email: this.state.email,
-        tel: this.state.tel
-      })
-      .end((err, res) => {
+    request.get('/api/users/current')
+      .end((err, res)=> {
         if (err) {
-          if (res.statusCode === 400) {
-            console.log(res.text);
-            return location.href = '/#/personal-page';
+          if (res.statusCode === 401) {
+            alert('Please Login!');
+            location.href = '/#/login-page'
+          } else {
+            return alert(err);
           }
-
-          if (res.statusCode === 403) {
-            console.log(res.text);
-            return location.href = '/#/login-page';
-          }
-
-          if (res.statusCode === 409) {
-            console.log(res.text);
-            return location.href = '/#/home-page'
-          }
-
-          return console.error(err);
         }
+        request.post('/api/users')
+          .send({
+            email: this.state.email,
+            tel: this.state.tel
+          })
+          .end((err, res) => {
+            if (err) {
+              if (res.statusCode === 400) {
+                console.log(res.text);
+                return location.href = '/#/personal-page';
+              }
 
-        if (res.statusCode === 201) {
-          console.log(res.text);
-          location.href = '/#/home-page'
-        }
+              if (res.statusCode === 403) {
+                console.log(res.text);
+                return location.href = '/#/login-page';
+              }
+
+              if (res.statusCode === 409) {
+                console.log(res.text);
+                return location.href = '/#/home-page'
+              }
+
+              return console.error(err);
+            }
+
+            if (res.statusCode === 201) {
+              console.log(res.text);
+              location.href = '/#/home-page'
+            }
+          })
       })
   }
 

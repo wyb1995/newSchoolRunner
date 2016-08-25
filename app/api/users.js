@@ -30,9 +30,9 @@ router.post('/', function (req, res, next) {
       if (haslogin) {
         return res.status(401).send('用户名或密码有误，登录失败');
       }
-      xiyouInfo(detail, function (err, name) {
+      xiyouInfo(detail, function (err, detail) {
         if (err) return next(err);
-        User.update({userId: userId}, {$set: {userName: name, email: email, tel: tel}}, function (err) {
+        User.update({userId: userId}, {$set: {userName: detail.Name, department: detail.Department, email: email, tel: tel}}, function (err) {
           if (err) return next(err);
           return res.status(201).send('用户信息已经存入本地数据库');
         });

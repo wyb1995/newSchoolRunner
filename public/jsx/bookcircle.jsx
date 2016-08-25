@@ -1,3 +1,4 @@
+import {Link} from 'react-router';
 import React from 'react';
 import Header from './header.jsx';
 import Footer from  './footer.jsx';
@@ -18,18 +19,18 @@ class MessageList extends React.Component {
   }
 
   componentWillMount() {
+    console.log('---------componentWillMount')
     request.get('/api/users/current')
       .end((err, res) => {
-        if(err) {
-          if(res.statusCode === 401){
+        if (err) {
+          if (res.statusCode === 401) {
             alert('Please Login!');
             location.href = '/#/login-page'
-          }else {
+          } else {
             return alert(err);
           }
         }
         this.setState({userName: res.body.userName});
-        // alert(res.body.userName + ':' + this.state.userName);
         request.get('/api/messages')
           .end((err, res)=> {
             if (err) {
@@ -41,7 +42,7 @@ class MessageList extends React.Component {
               }
             }
             this.setState({
-              allMessage: res.body
+              allMessage: res.body.reverse()
             });
           })
       });
@@ -58,7 +59,7 @@ class MessageList extends React.Component {
           if (res.statusCode === 401) {
             alert('please login!');
             location.href = '/#/login-page';
-          } else if(res.statusCode === 400){
+          } else if (res.statusCode === 400) {
             alert('message can not Empty')
           } else {
             alert(err);
@@ -74,12 +75,12 @@ class MessageList extends React.Component {
     })
   }
 
-  _onClickRefresh(){
+  _onClickRefresh() {
     location.reload(true);
   }
 
   render() {
-    const messageList = this.state.allMessage.reverse().map((message, index) =>
+    const messageList = this.state.allMessage.map((message, index) =>
       <div className="messageList" key={index}>
         <div className="messageContainer common">
           <div>
@@ -93,6 +94,7 @@ class MessageList extends React.Component {
     );
     return (
       <div className="fullPage">
+        <button type="button" className="btn btn-primary back"><Link to="/home-page">返回</Link></button>
         <button type="button" className="btn-link button refresh" onClick={this._onClickRefresh.bind(this)}>刷新</button>
         <div>
           <div className="bottom common">

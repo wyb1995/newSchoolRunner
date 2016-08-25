@@ -42,7 +42,19 @@
 
 .refresh{
     position: absolute;
-    top: 82px;
+    top: 20px;
+    right: 200px;
+    background-color: wheat !important;
+    color:black !important;
+    border: wheat solid 1px !important;
+}
+
+.back{
+    position: absolute;
+    top: 20px;
     right: 100px;
+    background-color: wheat !important;
+    color:black !important;
+    border: wheat solid 1px !important;
 }
 

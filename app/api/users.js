@@ -32,7 +32,7 @@ router.post('/', function (req, res, next) {
       }
       xiyouInfo(detail, function (err, detail) {
         if (err) return next(err);
-        User.update({userId: userId}, {$set: {userName: detail.Name, department: detail.Department, email: email, tel: tel}}, function (err) {
+        User.update({userId: userId}, {$set: {userName: detail.Name, department: detail.Department, readerType: detail.ReaderType, email: email, tel: tel}}, function (err) {
           if (err) return next(err);
           return res.status(201).send('用户信息已经存入本地数据库');
         });

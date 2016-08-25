@@ -6,14 +6,13 @@ class Footer extends React.Component {
     return (
       <footer>
         <div>
-          <a href="http://www.xiyou.edu.cn/" target="_blank">我的校园</a>
-          <a href="http://lib.xupt.edu.cn/" target="_blank">图书馆</a>
-          <a>快递</a>
-          <a>帮助</a>
+          <a className="footerA" href="http://www.xiyou.edu.cn/" target="_blank">我的校园</a>
+          <a className="footerA" href="http://lib.xupt.edu.cn/" target="_blank">图书馆</a>
         </div>
+
         <div id="divFooter">
-          Mail: <a>2891347@163.com</a>
-          Copyright&nbsp;©&nbsp;<a>SchoolRunner</a>
+          <span>本站由西安邮电大学SchoolRunner团队维护</span>
+          <span>Copyright&nbsp;©&nbsp;SchoolRunner 2016</span>
         </div>
       </footer>
     )

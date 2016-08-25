@@ -12,7 +12,7 @@ class Books extends React.Component {
   constructor(prors) {
     super(prors);
     this.state = {
-      borrowlist: [],
+      borrowList: [],
       detail: '',
       userName: '',
       department: '',
@@ -45,11 +45,11 @@ class Books extends React.Component {
               }
             }
             if (res.statusCode === 201) {
-              console.log(res.body.borrowlist);
-              if (res.body.borrowlist === 'NO_RECORD') {
-                this.setState({borrowlist: ''});
+              console.log('----------' + res.body.borrowList);
+              if (res.body.borrowList === 'NO_RECORD') {
+                this.setState({borrowList: ''});
               } else {
-                this.setState({borrowlist: res.body.borrowlist});
+                this.setState({borrowList: res.body.borrowList});
                 this.setState({detail: res.body.detail});
               }
             }
@@ -57,48 +57,57 @@ class Books extends React.Component {
       });
   }
 
-  // _onClickRenew(index) {
-  //   return () => {
-  //     request.get('/api/users/current')
-  //       .end((err, res)=> {
-  //         if (err) {
-  //           if (res.statusCode === 401) {
-  //             alert('Please Login!');
-  //             location.href = '/#/login-page'
-  //           } else {
-  //             return alert(err);
-  //           }
-  //         }
-  //         const session = this.state.detail;
-  //         const barcode = this.state.borrowlist[index].Barcode;
-  //         const department_id = this.state.borrowlist[index].Department_id;
-  //         const library_id = this.state.borrowlist[index].Library_id;
-  //
-  //         request.post('/api/users/books/renew')
-  //           .send({
-  //             session: session,
-  //             barcode:barcode,
-  //             department_id:department_id,
-  //             library_id:library_id
-  //           })
-  //           .end((err, res) => {
-  //             alert('续借成功');
-  //           })
-  //       })
-  // onClick={this._onClickRenew(index)}
-  //   }
-  // }
+  _onClickRenew(index) {
+    return () => {
+      request.get('/api/users/current')
+        .end((err, res)=> {
+          if (err) {
+            if (res.statusCode === 401) {
+              alert('Please Login!');
+              location.href = '/#/login-page'
+            } else {
+              return alert(err);
+            }
+          }
+          const session = this.state.detail;
+          const barcode = this.state.borrowList[index].Barcode;
+          const department_id = this.state.borrowList[index].Department_id;
+          const library_id = this.state.borrowList[index].Library_id;
+
+          request.post('/api/users/books/renew')
+            .send({
+              session: session,
+              barcode: barcode,
+              department_id: department_id,
+              library_id: library_id
+            })
+            .end((err, res) => {
+              if (err) {
+                if (res.statusCode === 409) {
+                  return alert('---失败了。。。');
+                }
+                alert(err);
+              }
+              if (res.body.Result === 'true') {
+                return alert('success 新的时间为：' + res.body.Detail);
+              } else {
+                return alert('失败了。。。');
+              }
+            })
+        })
+    }
+  }
 
 
   render() {
-    const borrowList = _.map(this.state.borrowlist, (borrow, index) =>
+    const borrowList = _.map(this.state.borrowList, (borrow, index) =>
       <div key={index} className="eachBook">
         <a className="bookLink" target='_blank'>{borrow.Title}</a>
-        <button type="button" className="btn btn-default btn-borrow">续 借</button>
+        <button type="button" className="btn btn-default btn-borrow" onClick={this._onClickRenew(index)}>续 借</button>
         <span className="btn-borrow">到期时间：{borrow.Date}</span>
       </div>
     );
-    const booklist = studentrent(this.state.borrowlist, this.state.readerType);
+    const booklist = studentrent(this.state.borrowList, this.state.readerType);
     return (
       <div className="container" id="booksContain">
         <button type="button" className="btn-link button back"><Link to="/home-page">返回</Link></button>

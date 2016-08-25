@@ -16,7 +16,8 @@ router.post('/', function (req, res, next) {
       }
       xiyouRent(detail, function (err, information, detail) {
         if (err) return next(err);
-        return res.status(201).json({borrowlist: information, detail: detail});
+        console.log(information);
+        return res.status(201).json({borrowList: information, detail: detail});
       })
     });
   });

@@ -15,7 +15,7 @@ class Navigation extends React.Component {
             <li><Link to="/home-page">首页</Link></li>
             <li><Link to="/library-page">图书信息</Link></li>
             <li><Link to="/bookCircle-page">书友圈</Link></li>
-            <li><Link to="/personalInfo-page">个人信息</Link></li>
+            <li><Link to="modify-personal-page">个人信息</Link></li>
           </ul>
         </div>
       </nav>

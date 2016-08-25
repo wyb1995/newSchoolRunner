@@ -5,15 +5,15 @@ import _ from 'lodash';
 
 function checkLogin(req, callback) {
   const info = req.cookies['info'];
-  if (info === null || info.length === 0 || !info.includes(':')) {
-    callback(null, false);
+  if (info === undefined || info === null || info.length === 0 || !info.includes(':')) {
+    return callback(null, false);
   }
   const userId = getUserIdFromInfo(info);
   User.findOne({userId: userId}, function (err, user, next) {
     if (err) return next(err);
     if(user){
       const password = user.password;
-      callback(null, generateInfo(userId, password) === info);
+      return callback(null, generateInfo(userId, password) === info);
     }
   });
 }

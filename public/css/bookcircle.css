@@ -27,16 +27,22 @@
     margin-right: 20px;
     display: inline-block;
 }
-.bottom button{
+.button{
     width: 5%;
     height: 40px;
-    border: 1px solid #a6e1ec;
+    border: 1px solid #a6e1ec !important;
 }
 #circleContain{
-    min-height:100%;
+    min-height:677px;
     position:relative;
 }
 #circleBody {
     padding-bottom: 80px;
+}
+
+.refresh{
+    position: absolute;
+    top: 82px;
+    right: 100px;
 }
 

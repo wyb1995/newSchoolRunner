@@ -6,8 +6,8 @@ function xiyouInfo(detail, callback) {
     .send({session: detail})
     .end((err, response) => {
       if (err)  return callback(err);
-      const name = response.body.Detail.Name;
-      callback(null, name);
+      //const name = response.body.Detail.Name;
+      callback(null, response.body.Detail);
     });
 }
 

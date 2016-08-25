@@ -18,21 +18,34 @@ class MessageList extends React.Component {
   }
 
   componentWillMount() {
-    request.get('/api/messages')
-      .end((err, res)=> {
-        if (err) {
-          if (res.statusCode === 401) {
+    request.get('/api/users/current')
+      .end((err, res) => {
+        if(err) {
+          if(res.statusCode === 401){
             alert('Please Login!');
-            location.herf = '/#/login-page'
-          } else {
+            location.href = '/#/login-page'
+          }else {
             return alert(err);
           }
         }
-        this.setState({
-          allMessage: res.body
-        });
+        this.setState({userName: res.body.userName});
+        // alert(res.body.userName + ':' + this.state.userName);
+        request.get('/api/messages')
+          .end((err, res)=> {
+            if (err) {
+              if (res.statusCode === 401) {
+                alert('Please Login!');
+                location.href = '/#/login-page'
+              } else {
+                return alert(err);
+              }
+            }
+            this.setState({
+              allMessage: res.body
+            });
+          })
+      });
 
-      })
   }
 
   _onSend() {
@@ -44,7 +57,9 @@ class MessageList extends React.Component {
         if (err) {
           if (res.statusCode === 401) {
             alert('please login!');
-            location.herf = '/#/login-page';
+            location.href = '/#/login-page';
+          } else if(res.statusCode === 400){
+            alert('message can not Empty')
           } else {
             alert(err);
           }
@@ -59,9 +74,12 @@ class MessageList extends React.Component {
     })
   }
 
+  _onClickRefresh(){
+    location.reload(true);
+  }
 
   render() {
-    const messageList = this.state.allMessage.map((message, index) =>
+    const messageList = this.state.allMessage.reverse().map((message, index) =>
       <div className="messageList" key={index}>
         <div className="messageContainer common">
           <div>
@@ -75,8 +93,16 @@ class MessageList extends React.Component {
     );
     return (
       <div className="fullPage">
-        <button type="button" className="btn btn-success btnPos">刷新</button>
-        {messageList}
+        <button type="button" className="btn-link button refresh" onClick={this._onClickRefresh.bind(this)}>刷新</button>
+        <div>
+          <div className="bottom common">
+            <input className="form-control" type="text" placeholder="我要发布"
+                   value={this.state.inputMessage}
+                   onChange={this._onChangeMessage.bind(this)}/>
+            <button className="btn-link button" type="button" onClick={this._onSend.bind(this)}>发送</button>
+          </div>
+
+        </div>
         <div className="messageList">
           <div className="messageContainer common">
             <div>
@@ -87,15 +113,7 @@ class MessageList extends React.Component {
             </div>
           </div>
         </div>
-        <div>
-          <div className="bottom common">
-            <input className="form-control" type="text" placeholder="我要发布"
-                   value={this.state.inputMessage}
-                   onChange={this._onChangeMessage.bind(this)}/>
-            <button className="btn-link" type="button" onClick={this._onSend.bind(this)}>发送</button>
-          </div>
-
-        </div>
+        {messageList}
       </div>
     )
   }

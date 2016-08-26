@@ -1,8 +1,8 @@
 function studentrent(borrowlist, readerType) {
-  var rent = 0;//借书数
-  var all;//可借书数
-  var ctime;//可借书时长
-  var outnum = 0;//超时书数
+  let rent = 0;//借书数
+  let all;//可借书数
+  let ctime;//可借书时长
+  let outnum = 0;//超时书数
   switch (readerType) {
     case '本科生':
       all = 15;
@@ -26,10 +26,10 @@ function studentrent(borrowlist, readerType) {
   else {
 
     rent = borrowlist.length;
-    var Dates = borrowlist;
-    var oDate = new Date();
+    let Dates = borrowlist;
+    let oDate = new Date();
     for (let i = 0; i < rent; i++) {
-      var d1 = new Date(Date.parse(Dates[i].Date));
+      let d1 = new Date(Date.parse(Dates[i].Date));
       if (oDate > d1) {
         outnum++;
       }

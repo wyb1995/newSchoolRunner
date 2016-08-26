@@ -5,13 +5,14 @@ require('../css/header.css');
 import Footer from './footer.jsx';
 require('../css/footer.css');
 import request from 'superagent';
+import {Link} from 'react-router';
 import _ from 'lodash';
 import studentrent from '../tool/bookdetail.js'
 class Books extends React.Component {
   constructor(prors) {
     super(prors);
     this.state = {
-      borrowlist: [],
+      borrowList: [],
       detail: '',
       userName: '',
       department: '',
@@ -33,35 +34,83 @@ class Books extends React.Component {
         this.setState({userName: res.body.userName});
         this.setState({department: res.body.department});
         this.setState({readerType: res.body.readerType});
-        console.log(202);
         request.post('/api/users/current/books/borrowed')
           .end((err, res) => {
             if (err) {
               if (res.statusCode === 401) {
                 alert('Please Login!');
                 location.href = '/#/login-page'
+              } else {
+                console.error(err);
               }
-              console.log(err);
             }
             if (res.statusCode === 201) {
-              this.setState({borrowlist: res.body.borrowlist});
-              this.setState({detail: res.body.detail});
+              console.log('----------' + res.body.borrowList);
+              if (res.body.borrowList === 'NO_RECORD') {
+                this.setState({borrowList: ''});
+              } else {
+                this.setState({borrowList: res.body.borrowList});
+                this.setState({detail: res.body.detail});
+              }
             }
           });
       });
   }
 
+  _onClickRenew(index) {
+    return () => {
+      request.get('/api/users/current')
+        .end((err, res)=> {
+          if (err) {
+            if (res.statusCode === 401) {
+              alert('Please Login!');
+              location.href = '/#/login-page'
+            } else {
+              return alert(err);
+            }
+          }
+          const session = this.state.detail;
+          const barcode = this.state.borrowList[index].Barcode;
+          const department_id = this.state.borrowList[index].Department_id;
+          const library_id = this.state.borrowList[index].Library_id;
+
+          request.post('/api/users/books/renew')
+            .send({
+              session: session,
+              barcode: barcode,
+              department_id: department_id,
+              library_id: library_id
+            })
+            .end((err, res) => {
+              if (err) {
+                if (res.statusCode === 409) {
+                  return alert('---失败了。。。');
+                }
+                alert(err);
+              }
+              if (res.body.Result === 'true') {
+                return alert('success 新的时间为：' + res.body.Detail);
+              } else {
+                return alert('失败了。。。');
+              }
+            })
+        })
+    }
+  }
+
+
   render() {
-    const borrowList = _.map(this.state.borrowlist, (index, id) =>
-      <div key={id} className="eachBook">
-        <a className="bookLink" target='_blank'>{index.Title}</a>
-        <button type="button" className="btn btn-default btn-borrow">续 借</button>
-        <span className="btn-borrow">到期时间：{index.Date}</span>
+    const borrowList = _.map(this.state.borrowList, (borrow, index) =>
+      <div key={index} className="eachBook">
+        <a className="bookLink" target='_blank'>{borrow.Title}</a>
+        <button type="button" className="btn btn-default btn-borrow" onClick={this._onClickRenew(index)}>续 借</button>
+        <span className="btn-borrow">到期时间：{borrow.Date}</span>
       </div>
     );
-    const booklist = studentrent(this.state.borrowlist, this.state.readerType);
+    const booklist = studentrent(this.state.borrowList, this.state.readerType);
     return (
       <div className="container" id="booksContain">
+        <button type="button" className="btn-link button back"><Link to="/home-page">返回</Link></button>
         <div className="bookDiv">
           <span className="booksSpan">
             {this.state.department}

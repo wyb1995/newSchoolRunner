@@ -20,6 +20,11 @@
     "css-loader": "0.23.1",
     "jasmine": "2.4.1",
     "style-loader": "0.13.1",
+    "file-loader": "0.9.0",
+    "exports-loader": "0.6.3",
+    "expose-loader": "0.7.1",
+    "less-loader": "2.2.3",
+    "url-loader": "0.5.7",
     "webpack": "1.13.1",
     "webpack-dev-middleware": "1.6.1",
     "webpack-hot-middleware": "2.12.2"
@@ -30,15 +35,11 @@
     "bootstrap": "3.3.7",
     "bootstrap-webpack": "0.0.5",
     "cookie-parser": "1.4.3",
-    "exports-loader": "0.6.3",
-    "expose-loader": "0.7.1",
     "express": "4.14.0",
     "extract-text-webpack-plugin": "1.0.1",
-    "file-loader": "0.9.0",
     "imports-loader": "0.6.5",
     "jquery": "3.1.0",
     "less": "2.7.1",
-    "less-loader": "2.2.3",
     "lodash": "4.15.0",
     "mongoose": "4.5.9",
     "nock": "8.0.0",
@@ -50,8 +51,7 @@
     "superagent-jsonp": "0.1.1",
     "superagent-logger": "latest",
     "supertest": "2.0.0",
-    "supertext": "1.0.0",
-    "url-loader": "0.5.7"
+    "supertext": "1.0.0"
   },
   "engines": {
     "node": ">=6.0.0"

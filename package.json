@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node app/server.js --ignore 'node_modules/' || exit 0",
+    "start": "./node_modules/.bin/babel-node app/server.js --ignore 'node_modules/' || exit 0",
     "lint": "eslint . -c twa-camp-2016 --no-eslintrc || exit 0",
     "test": "jasmine",
     "test-all": "JASMINE_CONFIG_PATH=spec/support/jasmine-all.json jasmine || exit 0"

@@ -62,17 +62,17 @@ class Personal extends React.Component {
           .end((err, res) => {
             if (err) {
               if (res.statusCode === 400) {
-                console.log(res.text);
+                alert(res.text);
                 return location.href = '/#/personal-page';
               }
 
               if (res.statusCode === 403) {
-                console.log(res.text);
+                alert(res.text);
                 return location.href = '/#/login-page';
               }
 
               if (res.statusCode === 409) {
-                console.log(res.text);
+                alert(res.text);
                 return location.href = '/#/home-page'
               }
 

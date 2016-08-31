@@ -5,6 +5,7 @@ import '../css/header.css';
 import Footer from './footer.jsx';
 import '../css/footer.css';
 import request from 'superagent';
+import {Link} from 'react-router';
 
 class Detail extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class Detail extends React.Component {
       department: ''
     };
   }
-  
+
   componentDidMount() {
     let bookurl = this.getBookValue();
     request.get('/api/users/current')
@@ -64,6 +65,7 @@ class Detail extends React.Component {
   render() {
     return (
       <div className="container" id="booksContain">
+        <button type="button" className="btn-link button back"><Link to="/book-page">返回</Link></button>
         <div className="detail">
           <h2>图书简介</h2>
         </div>

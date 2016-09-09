@@ -26,7 +26,7 @@ const route = <Router history={hashHistory}>
 </Router>;
 
 ReactDOM.render(
-  route, 
+  route,
   document.getElementById("content")
 );
 

@@ -81,17 +81,15 @@ class Books extends React.Component {
               library_id: library_id
             })
             .end((err, res) => {
+              console.log(res);
               if (err) {
                 if (res.statusCode === 409) {
                   return alert('---失败了。。。');
                 }
                 alert(err);
               }
-              if (res.body.Result === 'true') {
-                return alert('success 新的时间为：' + res.body.Detail);
-              } else {
-                return alert('失败了。。。');
-              }
+              alert('success');
+              return location.reload(true);
             })
         })
     }

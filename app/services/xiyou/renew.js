@@ -18,7 +18,7 @@ function xiyouRenew(req, callback) {
     .end((err, res) => {
       if(err) return callback(err);
       callback(null, res);
-    })
+    });
 }
 
 export default xiyouRenew;

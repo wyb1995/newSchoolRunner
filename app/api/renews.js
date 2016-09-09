@@ -11,13 +11,12 @@ router.post('/', function (req, res) {
     }
     xiyouRenew(req, function (err, result) {
       if(err) return next(err);
-      console.log(result.body.Result);
       if(result.body.Result === true){
         return res.json(result);
       }
       return res.sendStatus(409);
-    })
-  })
+    });
+  });
 });
 
 export default router;
